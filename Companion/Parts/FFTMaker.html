@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <script>
+      function buildMeters(amt) {
+        let msg = '';
+        for (x = 1; x < amt + 1; x++) {
+          let pad = (x * 6);
+          if (pad < 10)
+            pad = '0' + pad;
+          if (pad < 100)
+            pad = '0' + pad;
+          msg += `
+[MeterGradient${x}]
+Meter = Image
+W = 220
+H = 220
+UpdateDivider = -1
+Container = MeterFFT${x}
+ImageName = ../FFTGradient.png
+[MeterFFT${x}]
+Meter = Roundline
+Group = AudioGroup
+MeasureName = MeasureBand${x}
+MeterStyle = MeterFFT0
+StartAngle = ((2*PI)*(0.576 + 0.${pad}))
+LineColor = 255, 255, 255, ([MeasureBand${x}]*255)
+`;
+        }
+        console.log(msg);
+      }
+
+      function buildMeasures(amt) {
+        let msg = '';
+        for (x = 0; x < amt + 1; x++) {
+          msg += `
+[MeasureBand${x}]
+Measure = Plugin
+Group = AudioGroup
+Plugin = AudioLevel
+Parent = MeasureAudio
+Channel = #barCha#
+Type = #barType#
+AverageSize = #barAvg#
+BandIdx = ${x}`
+        }
+        console.log(msg);
+      }
+    </script>
+    <title></title>
+  </head>
+
+  <body onload="">
+  </body>
+
+</html>

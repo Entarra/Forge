@@ -1,0 +1,10 @@
+# Photoshop source files
+*.psd
+
+# Twitch followers bits
+stream0[1-9].png
+stream0[1-9]_logo.png
+
+# Unrelated folders
+Logos/
+Twitch Chat Blocker/
